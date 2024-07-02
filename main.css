@@ -1,0 +1,746 @@
+/*UNIVERSAL*/
+
+*{
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight:300;
+  max-width: 100vw;
+  
+}
+
+html,body {margin: 0; width: 100%; background-color:#12171d;/*oldcolorwas12161c*/}
+html {height: 100%;}
+
+body {
+  min-height: 100%; /*FIX FOUND - this fixed the repeat img only showing for part of the page, as the body was only reaching the viewport's pixel height when body was set to height: 100%; solution was to keep html as that setting, but set body to min-height 100% instead of definitive height to 100%*/
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden; /*prevent horizontal scroll bar*/
+  /*star background*/
+  background-image: url("/images/starV1frame1.png");
+  background-repeat: repeat;
+  background-attachment:fixed;
+  /*TODO - play with these settings and consider animating the background img using method from STARTEST
+  need to experiment with this more later (scrolling, animation with startest methods, full page coverage-FIX FOUND- min-height:100%; on body instead of height:100%;)*/
+}
+
+@media screen and (max-width: 850px){
+  body {
+    /*font-size: 12pt;*/
+    /*font-size: calc(3vw+1em);*/
+    background-size: 50%; /*fixes star density being too low on mobile*/
+  }
+}
+@media screen and (min-width: 0px){
+  :root {font-size: 12pt;  }
+}
+@media screen and (min-width: 365px){
+  :root {font-size: 13pt;  }
+}
+@media screen and (min-width: 422px){
+  :root {font-size: 14pt;  }
+}
+@media screen and (min-width: 506px){
+  :root {font-size: 15pt;  }
+}
+@media screen and (min-width: 600px){
+  :root {font-size: 16pt;  }
+}
+@media screen and (min-width: 700px){
+  :root {font-size: 18pt;  }
+}
+@media screen and (min-width: 850px){
+  :root {font-size: 20pt;  }
+}
+@media screen and (min-width: 1058px){
+  :root {font-size: 22pt;  }
+}
+@media screen and (min-width: 1391px){
+  :root {font-size: 24pt;  }
+}
+@media screen and (min-width: 1520px){
+  :root {font-size: 26pt;  }
+}
+@media screen and (min-width: 2000px){
+  :root {font-size: 30pt;  }
+}
+@media screen and (min-width: 3000px){
+  :root {font-size: 36pt;  }
+}
+@media screen and (min-width: 3800px){
+  :root {font-size: 40pt;  }
+}
+ /* 
+@media screen and (min-width: 850px){
+  body {font-size: 20pt;}
+}
+*/
+/* calc(2vw+1em)*/
+
+
+/*TOP*/
+
+/*nav*/
+/*nav-desktop*/
+nav {
+  z-index: 29;
+  align-self: end;
+  margin-right: 1%;
+  position: fixed;
+  
+}
+  nav button{
+    display: none;
+    visibility: hidden;
+    position: fixed;
+    height: 0px;
+    width: 0px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    z-index: 30;
+  }
+    #topnav {
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      margin: 0;
+      gap: 1rem;              /*gap can be used for flex!!*/
+      list-style-type: none;
+      background-color: #12171d9d;
+      padding: .5rem;
+      border-radius: .5rem;
+    }  
+      .topnav-item{list-style-type: none;}
+        .topnav-link{
+          z-index: 12; 
+          font-weight: 500;
+          text-decoration: none;
+        }
+          .topnav-link:link, .topnav-link:active{
+            color: #e3f5ff9d;
+          }
+          .topnav-link:visited{
+            color: #e3f5ff9d;
+          }
+          .topnav-link:hover{/*TODO-style hover - possible animation*/
+            color: #e3f5ff3f;
+          }
+   /*nav-mobile*/
+  /*CONSIDER CHANGING THIS MEDIA QUERY METHOD - see https://stackoverflow.com/questions/6370690/media-queries-how-to-target-desktop-tablet-and-mobile*/
+  @media screen and (max-width: 850px) and (prefers-reduced-motion){
+    #topnav-menu{
+      translate: 0 0;
+      opacity: 0;
+      transition: opacity 500ms ease-in-out; 
+      transition: translate 0s;
+  /*TODO - get this to work fully (test with Windows-start-easeofaccessdisplaysettings-showanimationsinwindows-off), and apply it to the jquery animations as well once working- currently only removes the close translation transition, but the open one still animates the same, and the opacity transition is nonexistent*/
+    }
+  }
+@media screen and (max-width: 850px){
+    
+  nav{z-index: 30; width: 40px; height: 40px; margin:0; padding: 0; top: 3px; right: 3px;}
+
+  .hamburger-icon {z-index: 32; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: space-evenly; align-items: center;}
+      .hamburger-icon-piece {
+        z-index: 32;
+        width: 25px;
+        height: 5%;
+        border: 1px solid white;
+        background-color: #e3f5ff;
+        border-radius: 1rem;
+      }
+  nav button{
+    z-index: 33;
+    display: block;
+    visibility: visible;
+    position: fixed;
+    background: none;
+    height: 40px;
+    width: 40px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    top: 0;
+    right: 0;
+  }
+  #topnav-menu{
+    width: 10rem; height: 14rem; margin: 0; position: fixed; top: 3px; right: 3px; /*fix: added measurements here instead of on nav element - this way the nav doesn't stay while only its content is translated*/
+    z-index: 31;
+    translate: 300vw 0;
+    transition: translate 0.3s ease-in-out; 
+  }
+    #topnav {
+      border: 1px inset white;
+      z-index: 36;
+      width: 100%;
+      height: 100%;
+      border: 1px inset white;
+      background-color: #12171df3;
+      flex-direction: column;
+      justify-content: space-evenly;
+      font-size: large;
+      align-items:flex-start; 
+    }
+          /*make topnav buttons clickable for full hamburger menu width*/
+          .topnav-link{width: 100%; display: inline-block;}
+          .topnav-item{width: 100%; display: inline-block;}
+  }
+/*HAMBURGER MENU SOLUTION FOUND - SYNTAX ERROR ON BELOW (+ adjacent sibling combinator used instead of general sibling ~, and placed in wrong place*/
+ 
+#topnav-open[aria-expanded="true"] ~ #topnav-menu {
+  translate: 0; 
+}
+
+@media (prefers-reduced-motion){
+  #topnav-open[aria-expanded="true"] ~ #topnav-menu {
+    opacity: 1;
+  }
+}
+/* #topnav-open[aria-expanded="true"] {
+    + #topnav-menu{translate: 0;} the + here is necessary for this to be properly selected!!
+  
+    @media (prefers-reduced-motion){
+      + #topnav-menu{opacity: 1;}
+    }
+  }   
+*/
+
+
+/*header*/
+                              
+header {
+width: 95%; 
+display: grid;
+grid-template: 100%/100%;
+height: 100svh;   /*fix for full screen logo at start*/
+}
+@media screen and (max-width: 850px){
+  header{min-height: 500px;}
+}
+
+@media screen and (min-width: 850px){
+  header{height: 50vw;}
+}/*fix for overlap happening with only 500px min height on small desktop windows, also fix extra space on tablets with height 50vw instead of minheight 50vw*/
+
+    header>.logo {width: 100%; grid-area: 1/1/1/1; margin:0; padding:0;border:0;} /*use grid to overlap the imgs by forcing into the same grid space*/
+    header>div {display: flex;justify-content: center; aspect-ratio: 1350/638;} /*aspect ratio set to match roots img so they stay the same size overlayed on eachother when the viewport changes*/
+    #roots {z-index: 1;}
+    #tree {
+      flex:none; height: 70%; z-index: 2;}
+    
+    #tree-img {height: 100%; width:100%; transition: transform .5s ease-in-out;}
+       #tree-img:hover {
+      transform: scale(1.2) translateY(-5%); 
+     } 
+
+
+            h1{position: relative; height: 1lh; top: 35%; left:3%; font-size: 9vw; color:#e3f5ff; z-index: 3;}
+
+            @media screen and (max-width: 850px){
+              header>.logo {height: 500px; margin-top: 20svh;}/*margin-top: 50px;*/
+              #roots { display: none; visibility: hidden;}
+              h1{top: 200px; font-size:53px;}
+            }
+
+            @media screen and (max-width: 400px){
+
+            }
+
+
+    /*TODO: fix styling of header so its elements can be zoomed*/
+    /*TODO: fix header tree and h1 so that the tree is below the text but can be hovered easily without the text getting in the way at all
+    -possible fix could be to just have the image on top but alter it so that the tree forms a "t" to blend it in with the text*/
+
+    
+
+/*main*/
+main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+
+
+/*load screen spaceship scroll animation*/
+
+#loadcontainer{
+  width: 100%;
+  overflow-y: hidden;
+  position: absolute;
+  top: 0;
+  /*z-index issues with this may arise, with it overlaying elements after animation ends, but for now it should be fine.. if issues arise, either make sure z-index is only defined on loadscreen not container, or add a second animation for the load container that just removes it from the page after x seconds (same time as load screen animation)*/
+}
+
+  /*MOBILE*/
+  @media screen and (max-width: 850px){
+   #loadcontainer {height: calc(332vw + 538px + 100svh);}
+  }                                   /*originally 332vw, but mission statement seems to have been disregarded in calculations/data gathering, so added its height of ~30vw to this.. although it doesn't seem necessary on the desktop calc for some reason*/
+  /*DESKTOP*/
+  @media screen and (min-width: 850px){
+    #loadcontainer {height: calc(272vw + 438px);}
+  }
+
+.loadscreen {
+  width: 100%;
+  height: 100%;
+/*  background-color: red;*/
+background-image: url("/images/starV1frame1.png");
+background-repeat: repeat;
+
+  position: absolute;
+  top: 0;
+  /*top: 75svh;*/
+  transform: translateY(0);
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  animation: scrolldown 10s linear 1;
+  animation-play-state: running;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+
+}
+
+.loadscreen>img{
+  width: 184px;
+  height: 255px;
+}
+
+#loadscreen-notfirst{
+  animation: scrolldown 5s linear 1;
+  animation-play-state: running;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
+}
+ 
+
+@media screen and (max-width: 850px){
+  @keyframes scrolldown {
+    0%{transform: translateY(0);}
+    20%{transform: translateY(400px);}
+    100%{transform: translateY(calc(332vw + 538px + 100svh)); display: none; visibility: hidden;}
+  }
+}
+@media screen and (min-width: 850px){
+  @keyframes scrolldown {
+    0%{transform: translateY(0);}
+    20%{transform: translateY(500px);}
+    100%{transform: translateY(calc(272vw + 438px)); display: none; visibility: hidden;}
+  }
+}
+
+
+/*sections*/
+section {width: 100%; height:fit-content; z-index: 1;}
+
+
+/*section - mission statement*/
+#roots-missionstatement{
+  z-index: 4;
+  height: 380px; 
+  line-height: 1.6;
+  width: 100%;
+  overflow-y: hidden;
+
+  background-repeat:no-repeat;
+  background-size: 100% 100%; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+/* z-index: 3; */
+ /*aspect-ratio: 1350/390;*/
+/*height with the above measurement was about 30vw*/
+}
+  @media screen and (min-width: 1px){#roots-missionstatement{background-image: url("/images/missionbackV2small.png");}}
+  @media screen and (min-width: 850px){#roots-missionstatement{background-image: url("/images/missionbackV2medium.png");}}   
+  @media screen and (min-width: 1650px){#roots-missionstatement{background-image: url("/images/missionbackV2large.png");}}
+   
+ 
+
+#roots-missionstatement p{
+  color: #e3f5ff;
+  padding-top: 2lh;
+  width: 85%;
+  height: 85%;
+  line-height: inherit;
+  text-align: center; /*maybe change to justify*/
+}
+  @media screen and (min-width: 700px){#roots-missionstatement p{padding-top: 1.5lh;}}
+  @media screen and (min-width: 3000px){#roots-missionstatement p{padding-top: .5lh;}}
+  
+  /* MOVED TO FULL BODY UNIVERSAL FONT SIZE - GOOD JOB HERE!
+@media screen and (min-width: 320px){
+  #roots-missionstatement p {font-size: 12pt;  }
+}
+@media screen and (min-width: 365px){
+  #roots-missionstatement p {font-size: 13pt;  }
+}
+@media screen and (min-width: 422px){
+  #roots-missionstatement p {font-size: 14pt;  }
+}
+@media screen and (min-width: 506px){
+  #roots-missionstatement p {font-size: 15pt;  }
+}
+@media screen and (min-width: 600px){
+  #roots-missionstatement p {font-size: 16pt;  }
+}
+@media screen and (min-width: 700px){
+  #roots-missionstatement p {font-size: 18pt;  }
+}
+@media screen and (min-width: 850px){
+  #roots-missionstatement p {font-size: 20pt;  }
+}
+@media screen and (min-width: 1058px){
+  #roots-missionstatement p {font-size: 22pt;  }
+}
+@media screen and (min-width: 1391px){
+  #roots-missionstatement p {font-size: 24pt;  }
+}
+@media screen and (min-width: 1520px){
+  #roots-missionstatement p {font-size: 26pt;  }
+}
+*/
+
+/*section - highlight reel*/
+        #highlight {
+          margin-top: 100px;
+          margin-bottom: 60px;
+          width: 100%;
+          aspect-ratio: 1350/690;
+          /*aspect-ratio: 1350/1410;*/ /*aspect ratio matches background images*/
+        /*  margin-top: -8%;
+          margin-bottom: -13%;*/
+          z-index: 3;
+        }
+        
+        #roots-highlight{
+          margin: 0; z-index: 4;
+          width: 100%;
+           aspect-ratio: 1350/690;
+        }
+
+          
+/*section - highlight reel content*/
+ 
+#highlight>#roots-highlight{
+  display: flex;
+}
+
+  .slider {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;  
+    /*height: 233px;*/
+    aspect-ratio:1350/690;
+    display: flex;
+    width: 100%;
+  }
+
+    .slider>button{
+      height: 100%;
+      z-index: 31;
+     border: none;
+      flex: 1;
+      color: white;
+      background-color: transparent;
+    }
+        #slide-left {/*padding-right: 5%;*/
+          background-image: url("/images/slidebuttonarrowleft.png");
+          background-size: cover;
+        }
+        #slide-right {/*padding-left: 5%;*/
+          background-image: url("/images/slidebuttonarrowright.png");
+          background-size: cover;
+        }
+
+    #slides-container{
+      z-index: 0;
+      aspect-ratio: 1350/690;
+      width: 100%;
+      left: 0px;
+      flex: 8;
+
+    }
+      .slide-anchor {
+          
+          border: none;
+          position: absolute;
+          aspect-ratio: 16/9; /*SLIDE IMAGE THUMBNAIL SIZE HERE*/
+          /*width: 33%;*/
+          width: 50%;
+          transition: left 500ms ease-in-out, transform 500ms ease-in-out;
+        }
+
+        .slider img, .slider iframe{
+          /*opacity: .95;*/
+          width: 100%;
+          height: 100%;
+          border: none;
+          box-shadow: 0px 0px 2px 2px black;
+        }
+        
+/* TODO: decide whether to add this feature
+        .slide-artistlink {
+          width: 100%;
+          height: 10px;
+          z-index: 100;
+          position: inherit;
+          left: inherit;
+          top: inherit;
+          bottom: inherit;
+          right: inherit;
+
+        }
+*/
+/*section - swirl animated buttons*/
+
+        #swirl-container{display:flex; width: 100%; z-index: 1;}
+        .swirl{ flex:1; max-width: 33%; z-index: 1; opacity: .8; position: relative;} /*possibly remove opacity style*/
+       .swirl-image{width: 100%; position: relative; top: 6%; z-index: 1;}
+        .swirl-link{
+          display: block; width: 100%; height: 100%; 
+          justify-content: center; align-items: center; display: flex; 
+          position: relative; top: -94%; 
+          text-decoration: none;
+          z-index: 5;
+          
+          background-image: url("/images/swirltext.png");
+          background-size: cover;
+          background-color: transparent;
+          
+          }
+
+          .swirl-text{font-weight: 700; font-size: 2rem; box-sizing: border-box; z-index: 10;position: absolute; text-align: center; border-radius: 50%;background-color: #13181e;/* background-color: #fffafd; border: 3px solid #a54a59*/}
+            @media screen and (min-width:850px){.swirl-text{font-size: 1rem;}}
+            @media screen and (min-width:1600px){.swirl-text{font-size: 1.5rem;}}
+            
+            .swirl-link:link, .swirl-link:active{
+              color: #fffdef;
+              /*color: #fffdef; more yellow like the belt of the black hole
+              or e3f5ff to match the rest of the site*/
+            }
+            .swirl-link:visited{
+              color: #fffdef;
+            }
+            .swirl-link:hover, .swirl-link:focus{
+              color: #a54a59; 
+            }
+
+      @media screen and (max-width: 850px){
+        
+          #swirl-container{
+            width: 100%;
+            display: grid;
+        grid-template-columns: repeat(4, 1fr); /* Define four equal-width columns */
+        grid-template-rows: auto auto; 
+        grid-template-areas: 
+            ". swirl1 swirl1 ."
+            ". swirl2 swirl2 ."
+            ". swirl3 swirl3 .";
+          }
+          .swirl-text {font-weight: 600; font-size: 1.3rem;}
+          .swirl {max-width: 50vw; width: 50vw;}
+            #swirl1{ grid-area: swirl1;}
+            #swirl2{ grid-area: swirl2;}
+            #swirl3{ grid-area: swirl3;}
+          #swirl-link1{grid-area: swirl1; }
+          #swirl-link2{grid-area: swirl2; }
+          #swirl-link3{grid-area: swirl3; }
+
+      }
+        
+/*spaceship*/
+
+/*section - reviews*/
+        #reviews{
+          width: 80%;
+          color: #e3f5ff;
+          display: flex;
+          flex-direction: column;
+          height: 120vw;
+          justify-content: space-evenly;
+          z-index: 1;
+        }
+
+        #reviews>h2{
+          text-shadow: 1px 1px 1px black;
+          padding-top: 8px;
+          border-top: 1px inset #e3f5ff;
+        }
+
+                article {
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-between;
+                  height: 30vw;
+                }
+
+                #article2{
+                  flex-direction: row-reverse;
+                }
+
+                article>img {
+                  aspect-ratio: 1/1;
+                  height: 90%;
+                  box-shadow: 0px 0px 4px black;
+                  
+                }
+
+                article>.text-container{
+                  height: 90%;
+                  width: 63%;
+                
+                }
+
+                article p{
+                  height: 70%; /*set to 69 instead of original 70 to keep last line cutoff happening consistently across vw's (not a special value this one just happened to work for that*/
+                  overflow: hidden;
+                  white-space: wrap;
+                  text-align: left;
+                  text-shadow: 1px 1px 1px black; /*possibly remove but it seems it may increase readability although the background is already close to black*/
+                  
+                }
+                            article a{
+                              border-bottom: 1px solid #e3f5ff;
+                              width: 100%;
+                              margin-top: -42%;
+                              padding-top: 45%;
+                              padding-bottom: 3%;
+                              display: block;
+                              text-align: center;
+                              text-decoration: none;
+                              z-index: 21;
+                            }
+
+                            article a:link, article a:active{
+                              color: #e3f5ff9d;
+                            }
+
+                            article a:visited{
+                              color: #e3f5ff9d;
+                            }
+
+                            article a:hover{
+                              color: #e3f5ff3f;
+                            }
+
+
+/*footer*/
+footer{z-index: 1; display: flex; justify-content: center; align-items: center; width: 100%; max-width: 100vw;}
+    .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin: 0;
+    gap: 1rem;
+
+    list-style-type: none;
+    background-color: #12171d9d;
+    padding: 1rem;
+    border-radius: 1rem;
+    }
+        @media screen and (max-width: 850px){
+        footer{display: grid; 
+            grid-template-columns: repeat(1, 100%);     grid-template-rows: auto auto; 
+            grid-template-areas: 
+                "internals"
+                "socials";    
+            }
+            #footer-internals{grid-area: internals;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: row;
+                margin: 0;
+                gap: 1rem;           
+            
+                list-style-type: none;
+                background-color: #12171d9d;
+                padding: 1rem;
+                border-radius: 1rem;}
+            #footer-socials{grid-area: socials;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: row;
+                margin: 0;
+                gap: 1rem;             
+            
+                list-style-type: none;
+                background-color: #12171d9d;
+                padding: 1rem;
+                border-radius: 1rem;
+            }
+        }
+            .footer-item{list-style-type: none;}
+            .footer-link{
+            z-index: 12; 
+            font-weight: 500;
+            text-decoration: none;
+            }
+            footer img {height: 1rem;}
+            .footer-link:link, .footer:active{
+              color: #e3f5ff9d;
+            }
+            .footer-link:visited{
+              color: #e3f5ff9d;
+            }
+            .footer-link:hover{/*TODO-style hover - possible animation*/
+              color: #e3f5ff3f;
+            }
+                            
+/*-----------------------BOTTOM------------------------------------------*/
+
+
+
+/*TODO - REVIEWS - add a continue arrow or animation or both under and to right of text, fix text overflow to actually show ellipsis or something*/
+/*TODO - REVIEWS - add fadeout at bottom of review text, continue styling the anchor/continue reading area*/
+
+
+/*TODO - change width of all container elements (or just the html/body elements?) to a query based size so that the containers and their children can be zoomed - changing just the container this way should work, as the children are percentages of the container size not the viewport*/
+
+/*TODO - consider adding the startest animations below to various parts of the site (keyframe animation for background or hover animation for element interaction*/
+/*
+#STARTEST {
+width:100%;
+aspect-ratio:456/347;
+background-image: url("/images/starV1frame1.png");
+background-repeat: no-repeat;
+}
+
+#STARTEST>img {
+visibility:hidden;
+opacity: 0;
+transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+
+}
+
+#STARTEST:hover>img{
+visibility: visible;
+opacity: 1;
+transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+
+#STARTEST2 {
+width:100%;
+aspect-ratio:456/347;
+background-image: url("/images/starV1frame1.png");
+background-repeat: no-repeat;
+}
+
+#STARTEST2>img{
+animation: .75s startest2 infinite alternate;
+}
+
+@keyframes startest2 {
+0%{opacity: 0;visibility:hidden;}
+100%{opacity: 1;visibility: visible;}
+}
+*/
